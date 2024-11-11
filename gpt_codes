@@ -1,0 +1,69 @@
+<h3 style="color: yellow">FINDING THE IDEAL NUMBER OF GAMES TO PLAY IN A DAY FOR RANK PROGRESSION</h3>
+
+Description:
+
+This project aims to identify the optimal number of games that League of Legends players should play per day to maximize their rank progression. By examining game data, we hope to understand how daily game frequency affects player performance and progression in the ranked system. 
+
+Data Collection:
+- Region: We will focus exclusively on the SG2 (Singapore) region.
+- Player Sample: The sample will include only the top 200 players by rank in the SG2 region to make sure that the sample is representative of the top players in the region.
+- Data Sources: All data will be gathered through Riot’s Developer API.
+
+Process:
+1. Identify Player Ranks: Webscrape the top 200 players in the SG2 region.
+
+2. Gather Match History: For each player, obtain the PUUID  to then fetch the match history for the player.
+
+3. Calculate Daily Game Count: For each player, calculate the total number of games played in a single day across multiple days.
+
+4. Determine Ideal Game Count: Analyze the data to identify patterns and determine the average number of games that gives the highest rank increase.
+
+
+--------------------------------------------------------
+
+Scrape multiple pages of players
+
+# selenium Webdriver setup (for extracting data dynamically loaded in JS)
+driver_path = './drivers/chromedriver.exe'
+service = Service(driver_path)
+driver = webdriver.Chrome(service=service)
+
+# Create empty list to store all player names
+all_player_names = []
+
+# Loop through pages 1-5 to get 500 players (100 per page)
+for page in range(1, 6):
+    print(f"Scraping page {page}...")
+    
+    # Construct URL with page number
+    url = f'https://www.leagueofgraphs.com/rankings/summoners/sg/page-{page}'
+    driver.get(url)
+    
+    # buffer time for loading JS
+    time.sleep(10)
+    
+    # Parse the page content
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    table = soup.find('table', {'class': 'data_table'})
+    
+    if page == 1:  # Only get headers from first page
+        headers = [header.text.strip() for header in table.find_all('th')]
+    
+    # Get rows from current page
+    rows = table.find('tbody').find_all('tr')
+    
+    # Extract player info from each row
+    for row in rows:
+        cols = row.find_all('td')
+        player_info = [col.text.strip() for col in cols]
+        all_player_names.append(player_info)
+
+driver.quit()
+
+# Create DataFrame with all players and save to CSV
+df = pd.DataFrame(all_player_names, columns=headers)
+df.to_csv('sg2_names_RAW.csv', index=False)
+
+print(f'Data successfully scraped to sg2_names_RAW.csv')
+print(f'Total players scraped: {len(all_player_names)}')
+

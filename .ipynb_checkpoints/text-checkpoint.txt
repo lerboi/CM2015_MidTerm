@@ -1,0 +1,13 @@
+data collection, importion, cleaning, manipulation
+
+Get RAW(keyword) data from API
+
+Riot API KEY: RGAPI-fb130863-e4b6-42b7-bf5d-d6d0fcbe008d
+
+Mental Fatigue through Consecutive Matches and its Impact on Performance
+Goal: Find the IDEAL number of games to play a day for rank progression
+Idea: Analyze performance degradation when players engage in multiple matches in a row without breaks.
+
+ChatGPT chat - https://chatgpt.com/share/670dd3b8-3c0c-8008-9ee4-3a70e4892536
+
+Using League of Legends for a project that analyzes the effect of mental fatigue on consecutive matches and attempts to determine the optimal number of games for rank progression is a novel and exciting idea. Below is a streamlined approach to make this feasible using the Riot API, along with suggestions for relevant data points and insights. The good news is that this exact project idea isn’t widespread yet, so your work will stand out.

@@ -1,0 +1,5 @@
+Webscraping Sites
+https://www.leagueofgraphs.com/rankings/summoners/sg
+
+RIOT APIs
+League-V4 API to identify players by rank, the Summoner-V4 API to retrieve PUUIDs, and the Match-V5 API to compile match histories for daily game counts

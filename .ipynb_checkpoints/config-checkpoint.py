@@ -1,0 +1,1 @@
+RIOT_API_KEY = "RGAPI-fb130863-e4b6-42b7-bf5d-d6d0fcbe008d"
